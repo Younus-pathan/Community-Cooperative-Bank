@@ -1,0 +1,28 @@
+server:
+  port: 8761  # Default port for Eureka Server
+
+spring:
+  application:
+    name: eureka-service
+  cloud:
+    config:
+      enabled: false
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false  # Don't register the server with itself
+    fetchRegistry: false       # Don't fetch registry info from itself
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+# Actuator configuration for monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
